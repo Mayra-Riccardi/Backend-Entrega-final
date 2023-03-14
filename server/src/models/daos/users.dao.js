@@ -1,6 +1,6 @@
 const MongoContainer = require('../containers/mongo.containers')
 const UserSchema = require('../schemas/user.schema');
-const { HTTPError} = require('../../utils/api.utils');
+const { HTTPError} = require('../../utils/errors.utils');
 const {STATUS} = require('../../constants/api.constants')
 
 

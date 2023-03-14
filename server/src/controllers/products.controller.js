@@ -1,6 +1,6 @@
 const {STATUS} = require('../constants/api.constants');
-const {succesResponse} = require('../utils/api.utils')
-const { getProducts, getProductById, saveProduct, updateProduct, deleteProduct } = require ('../services/products.services.js')
+const {succesResponse} = require('../utils/errors.utils')
+const { getProducts, getProductById, getProductsByCategory, saveProduct, updateProduct, deleteProduct } = require ('../services/products.services.js')
 
 
 
@@ -27,12 +27,22 @@ class ProductsController {
         next(err)
       }
     }
+    async getProductsByCategory(req, res, next) {
+      const { category } = req.params
+      try {
+        const products = await getProductsByCategory(category)
+        const response = succesResponse(products)
+        res.json(response)
+      } catch (err) {
+        next(err)
+      }
+    }
   
     async saveProduct(req, res, next) {
       try {
         const newProduct = await saveProduct(req.body)
         const response = succesResponse(newProduct)
-        res.status(STATUS.CREATED).json(response)
+        res.json(response)
       } catch (err) {
         next(err)
       }

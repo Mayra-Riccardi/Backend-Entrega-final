@@ -11,6 +11,7 @@ const getProducts = async category => {
 }
 
 const getProductById = async (id) => await productsDAO.getById(id);
+const getProductsByCategory = async (category) => await productsDAO.getByCategory(category);
 const saveProduct = async product => await productsDAO.save(product);
 const updateProduct = async (id, product) => await productsDAO.update(id, product)
 const deleteProduct = async (id) => await productsDAO.delete(id)
@@ -18,6 +19,7 @@ const deleteProduct = async (id) => await productsDAO.delete(id)
 module.exports = {
     getProducts,
     getProductById,
+    getProductsByCategory,
     saveProduct,
     updateProduct,
     deleteProduct

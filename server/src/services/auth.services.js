@@ -1,5 +1,5 @@
 const {STATUS} = require('../constants/api.constants');
-const {HTTPError} = require('../utils/api.utils');
+const {HTTPError} = require('../utils/errors.utils');
 const UsersDAO = require('../models/daos/users.dao');
 const assingCartUser = require ('./users.services');
 

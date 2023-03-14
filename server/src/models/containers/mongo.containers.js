@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const dbconfig = require('../../db/config');
-const {HTTPError} = require('../../utils/api.utils');
+const {HTTPError} = require('../../utils/errors.utils');
 const {STATUS}=require('../../constants/api.constants')
 mongoose.set('strictQuery', true);
 
@@ -25,10 +25,15 @@ class MongoContainer{
       async getById(id) {
         const document = await this.model.findOne({ _id: id }, { __v: 0 })
         if (!document) {
-          const message = `Resource with id ${id} not found`
+          const message = `Element with id ${id} not found`
           throw new HTTPError(STATUS.NOT_FOUND, message)
         }
         return document
+      }
+
+      async getByCategory(category) {
+        const documents = await thhis.model.find({_category: category}, { __v: 0 })
+
       }
     
       async save(item = {}) {
@@ -42,7 +47,7 @@ class MongoContainer{
           { $set: { ...item } }
         )
         if (!updatedDocument.matchedCount) {
-          const message = `Resource with id ${id} does not exists`
+          const message = `Element with id ${id} does not exists`
           throw new HTTPError(STATUS.NOT_FOUND, message)
         }
         return updatedDocument
@@ -51,7 +56,7 @@ class MongoContainer{
       async delete(id) {
         const deletedDocument = await this.model.deleteOne({ _id: id })
         if (!deletedDocument.deletedCount) {
-          const message = `Resource with id ${id} does not exists`
+          const message = `Element with id ${id} does not exists`
           throw new HTTPError(STATUS.NOT_FOUND, message)
         }
         return deletedDocument

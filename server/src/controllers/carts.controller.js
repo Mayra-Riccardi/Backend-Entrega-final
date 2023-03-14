@@ -1,6 +1,6 @@
 const {STATUS} = require('../constants/api.constants');
-const {HTTPError}= require('../utils/api.utils');
-const { succesResponse } = require('../utils/api.utils')
+const {HTTPError}= require('../utils/errors.utils');
+const { succesResponse } = require('../utils/errors.utils')
 const {sendEmail} = require('../utils/email.utils');
 const {sendSMS} = require('../utils/sms.utils');
 const {sendWhatsapp} = require('../utils/whatsapp.utils');

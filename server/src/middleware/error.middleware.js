@@ -1,5 +1,5 @@
 const {STATUS } = require('../constants/api.constants') 
-const { errorResponse } = require('../utils/api.utils') 
+const  {errorResponse}  = require('../utils/errors.utils') 
 const {logger} = require('../logger/logger') 
 
 const errorMiddleware = (err, req, res, next) => {

@@ -4,6 +4,7 @@ const productsRoutes = require('../routers/products/products.routes')
 const cartsRoutes = require('../routers/carts/carts.routes')
 const authRoutes = require('../routers/auth/auth.routes')
 // const usersRoutes = require('../routers/users/users.routes');
+const {authMiddleware} = require('../middleware/jwt.middleware')
 
 const router = express.Router();
 
@@ -19,5 +20,8 @@ router.get('/auth/register', async (req, res) => {
 })
 router.get('/auth/login', async (req, res) => {
     res.sendFile(path.resolve(__dirname, '../../../client/public/login.html'))
+})
+router.get('/auth/currentUser', authMiddleware, (req, res) => {
+    res.send(req.user)
 })
 module.exports= router

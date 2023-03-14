@@ -1,5 +1,5 @@
 const {STATUS} = require('../../constants/api.constants')
-const {HTTPError}= require('../../utils/api.utils')
+const {HTTPError}= require('../../utils/errors.utils')
 const MongoContainer = require('../containers/mongo.containers')
 const CartSchema= require('../schemas/carts.schema')
 const ProductsDAO = require('./products.dao')

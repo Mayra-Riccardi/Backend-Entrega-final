@@ -1,6 +1,8 @@
 const formSignup = document.getElementById("signup-form");
 formSignup.addEventListener('submit', async (event) => {
+  console.log('before ')
   event.preventDefault();
+  console.log('after')
   const fullName = formSignup[0].value;
   const email = formSignup[1].value;
   const password = formSignup[2].value;
@@ -16,9 +18,11 @@ formSignup.addEventListener('submit', async (event) => {
   });
 
   const response = await signupResponse.json();
+  console.log(response)
 
   const { token } = response.data;
-
+  console.log(token)
+  console.log(response.data)
   if (token) {
     localStorage.setItem('access_token', token);
 

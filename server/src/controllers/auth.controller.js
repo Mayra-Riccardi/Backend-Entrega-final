@@ -1,7 +1,7 @@
 const {STATUS} = require('../constants/api.constants');
-const {succesResponse} = require('../utils/api.utils')
-const {HTTPError}= require('../utils/api.utils');
-// const {sendEmail} = require('../utils/email.utils');
+const {succesResponse} = require('../utils/errors.utils')
+const {HTTPError}= require('../utils/errors.utils');
+// const {sendEmail} = require('/email.utils');
 const { register, login } = require('../services/auth.services');
 
 
