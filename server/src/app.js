@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors')
 const {logger} = require ('./logger/logger')
-const apiRoutes = require('./routers/api.routes')
+const appRoutes = require('./routers/app.routes')
 const {errorMiddleware} = require('./middleware/error.middleware')
 const path = require('path');
 const publicPath = path.join(__dirname, '..','..', 'client', 'public');
@@ -17,7 +17,7 @@ app.use(cors())
 
 
 
-app.use('/api', apiRoutes)
+app.use('/api', appRoutes)
 app.use(errorMiddleware)
 
 module.exports = app

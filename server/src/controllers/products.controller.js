@@ -1,5 +1,6 @@
 const {STATUS} = require('../constants/api.constants');
 const {succesResponse} = require('../utils/errors.utils')
+const { HTTPError } = require( '../utils/errors.utils')
 const { getProducts, getProductById, getProductsByCategory, saveProduct, updateProduct, deleteProduct } = require ('../services/products.services.js')
 
 
@@ -7,32 +8,31 @@ const { getProducts, getProductById, getProductsByCategory, saveProduct, updateP
 class ProductsController {
     
   async getProducts(req, res, next) {
-      const { category } = req.query;
       try {
-        const products = await getProducts(category)
-        const response = succesResponse(products)
-        res.json(response)
+        const allProducts = await getProducts()
+        const response = succesResponse(allProducts)
+        res.status(STATUS.OK).json(response)
       } catch (err) {
-        next(err)
+        next(new HTTPError(STATUS.BAD_REQUEST, "Sorry, we don't found any products to show you"))
       }
     }
   
     async getProductById(req, res, next) {
-      const { id } = req.params
+      const { idProduct } = req.params
       try {
-        const product = await getProductById(id)
+        const product = await getProductById(idProduct)
         const response = succesResponse(product)
-        res.json(response)
+        res.status(STATUS.OK).json(response)
       } catch (err) {
-        next(err)
+        next(new HTTPError(STATUS.BAD_REQUEST, "Opss, we don't found any product with this code, plese check the id"))
       }
     }
     async getProductsByCategory(req, res, next) {
       const { category } = req.params
       try {
-        const products = await getProductsByCategory(category)
-        const response = succesResponse(products)
-        res.json(response)
+        const productsCategory = await getProductsByCategory(category)
+        const response = succesResponse(productsCategory)
+        res.status(STATUS.OK).json(response)
       } catch (err) {
         next(err)
       }
@@ -42,31 +42,31 @@ class ProductsController {
       try {
         const newProduct = await saveProduct(req.body)
         const response = succesResponse(newProduct)
-        res.json(response)
+        res.status(STATUS.OK).json(response)
       } catch (err) {
-        next(err)
+        next(new HTTPError(STATUS.BAD_REQUEST))
       }
     }
   
     async updateProduct(req, res, next) {
-      const { id } = req.params
+      const { idProduct } = req.params
       try {
-        const updatedProduct = await updateProduct(id, req.body)
+        const updatedProduct = await updateProduct(idProduct, req.body)
         const response = succesResponse(updatedProduct)
-        res.json(response)
+        res.status(STATUS.OK).json(response)
       } catch (err) {
-        next(err)
+        next(new HTTPError(STATUS.BAD_REQUEST, "Opss, we don't found any product with this code, plese check the id"))
       }
     }
   
     async deleteProduct(req, res, next) {
-      const { id } = req.params
+      const { idProduct } = req.params
       try {
-        const deletedProduct = await deleteProduct(id)
+        const deletedProduct = await deleteProduct(idProduct)
         const response = succesResponse(deletedProduct)
-        res.json(response)
+        res.status(STATUS.OK).json(response)
       } catch (err) {
-        next(err)
+        next(new HTTPError(STATUS.BAD_REQUEST, "Opss, we don't found any product with this code, plese check the id"))
       }
     }
   }

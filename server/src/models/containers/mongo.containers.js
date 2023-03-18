@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const dbconfig = require('../../db/config');
-const {HTTPError} = require('../../utils/errors.utils');
+const {HTTPError} = require('../../utils/api.utils');
 const {STATUS}=require('../../constants/api.constants')
 mongoose.set('strictQuery', true);
 
@@ -29,11 +29,6 @@ class MongoContainer{
           throw new HTTPError(STATUS.NOT_FOUND, message)
         }
         return document
-      }
-
-      async getByCategory(category) {
-        const documents = await thhis.model.find({_category: category}, { __v: 0 })
-
       }
     
       async save(item = {}) {

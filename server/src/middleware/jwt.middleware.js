@@ -31,7 +31,7 @@ const authMiddleware = async (req, res, next) => {
   }
 
   if (!token) {
-   
+    
     return next(new HTTPError(STATUS.UNAUTHORIZED, 'Sorry, you must be authenticated to access this route'))
   }
 
@@ -44,6 +44,7 @@ const authMiddleware = async (req, res, next) => {
     if (!user) {
       return next(new HTTPError(STATUS.UNAUTHORIZED, 'No user matches with the token'))
     }
+    req.user = user;
 
     next()
   } catch (error) {

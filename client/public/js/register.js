@@ -1,14 +1,12 @@
-const formSignup = document.getElementById("signup-form");
+const formRegister = document.getElementById("signup-form");
 formSignup.addEventListener('submit', async (event) => {
-  console.log('before ')
   event.preventDefault();
-  console.log('after')
-  const fullName = formSignup[0].value;
-  const email = formSignup[1].value;
-  const password = formSignup[2].value;
-  const phone = formSignup[3].value
+  const fullName = formRegister[0].value;
+  const email = formRegister[1].value;
+  const password = formRegister[2].value;
+  const phone = formRegister[3].value
 
-  const signupResponse = await fetch('/api/auth/register', {
+  const registerResponse = await fetch('/api/auth/register', {
     method: "POST",
     headers: {
       'Accept': 'application/json',
@@ -17,21 +15,17 @@ formSignup.addEventListener('submit', async (event) => {
     body: JSON.stringify({ fullName, email, password, phone })
   });
 
-  const response = await signupResponse.json();
+  const response = await registerResponse.json();
   console.log(response)
 
+
   const { token } = response.data;
-  console.log(token)
-  console.log(response.data)
+  console.log("token", token)
+  console.log("response.data", response.data)
   if (token) {
     localStorage.setItem('access_token', token);
-
-    // Get the cart ID from the response
-    const { cartId } = response.data.user;
-
-    // Redirect to the cart page with the cart ID in the URL
-    location.href = `/api/carts/${cartId}/products`;
+    location.href = "/api/profile";
   } else {
-    location.replace = "/unauthorized"
+    location.href = "/unauthorized"
   }
 });
