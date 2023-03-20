@@ -5,6 +5,7 @@ const cartsRoutes = require('./carts/carts.routes');
 const authRoutes = require('./auth/auth.routes');
 const usersRoutes = require('./users/users.routes');
 const ordersRoutes = require('./orders/orders.routes');
+const infoServerRoute = require('./info/info.routes');
 const {authMiddleware} = require('../middleware/jwt.middleware');
 
 const router = express.Router();
@@ -14,7 +15,7 @@ router.use('/carts', cartsRoutes);
 router.use('/auth', authRoutes);
 router.use('/users', usersRoutes);
 router.use('/orders', ordersRoutes);
-
+router.use('/info', infoServerRoute)
 
 router.get('/', authMiddleware, async (req, res) => {
     if(!req.user){
