@@ -1,15 +1,14 @@
-const envConfig = require('../env.config') 
+const envConfig = require('../env.config')
 const jwt = require('jsonwebtoken')
-const  {logger} =require('../logger/logger') 
+const { logger } = require('../logger/logger')
 const { STATUS } = require('../constants/api.constants')
-const { HTTPError } = require( '../utils/errors.utils')
+const { HTTPError } = require('../utils/errors.utils')
 const UsersDAO = require('../models/daos/users.dao')
 
 const usersDAO = new UsersDAO()
 
-
 const adminMiddleware = (req, res, next) => {
-  try{
+  try {
     const token = req.headers.authorization.split(' ')[1];
     const decoded = jwt.verify(token, envConfig.JWT_SECRET);
     if (!decoded.admin) {
@@ -31,11 +30,11 @@ const authMiddleware = async (req, res, next) => {
   }
 
   if (!token) {
-    
+
     return next(new HTTPError(STATUS.UNAUTHORIZED, 'Sorry, you must be authenticated to access this route'))
   }
 
-  try{
+  try {
     // Verify token
     const decoded = jwt.verify(token, envConfig.JWT_SECRET)
 
@@ -52,5 +51,5 @@ const authMiddleware = async (req, res, next) => {
   }
 
 }
-module.exports = {adminMiddleware, authMiddleware}
+module.exports = { adminMiddleware, authMiddleware }
 

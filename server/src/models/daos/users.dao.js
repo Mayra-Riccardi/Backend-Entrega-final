@@ -1,7 +1,7 @@
 const MongoContainer = require('../containers/mongo.containers')
 const UserSchema = require('../schemas/user.schema');
-const { HTTPError} = require('../../utils/errors.utils');
-const {STATUS} = require('../../constants/api.constants')
+const { HTTPError } = require('../../utils/errors.utils');
+const { STATUS } = require('../../constants/api.constants')
 
 
 const collection = 'users'
@@ -18,7 +18,7 @@ class UsersDAO extends MongoContainer {
       throw new HTTPError(STATUS.NOT_FOUND, message)
     }
     return user
-    
+
   }
 }
 

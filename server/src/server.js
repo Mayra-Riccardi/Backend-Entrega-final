@@ -1,41 +1,37 @@
-const app = require('./app')
-const path = require('path')
+const express = require('express');
+const cors = require('cors')
 const { PORT } = require('./env.config');
-const {logger} = require ('./logger/logger')
+const { logger } = require('./logger/logger')
 const MongoContainer = require('./models/containers/mongo.containers')
-// const apiRoutes = require('./routers/api.routes')
+const appRoutes = require('./routers/app.routes')
+const { errorMiddleware } = require('./middleware/error.middleware')
+const path = require('path');
+const publicPath = path.join(__dirname, '..', '..', 'client', 'public');
 
-// const app = express();
+const app = express()
 
-// app.use(express.json());
-// app.use(express.urlencoded({extended: true}))
-// app.use('/api', apiRoutes);
-// app.set('views', './views');
-// app.set('view engine', 'ejs');
-// app.use(express.static(path.resolve(__dirname, './public')));
-// const server = app.listen(PORT,()=>{
-//     MongoContainer.connect().then(()=>{
-//         logger.trace(`server in the port, ${PORT}`);
-//         logger.trace('connected to mongo');
-//     })
-// })
-// server.on('error', error=>{
-//     logger.trace(`error ${error}`);
-// }
-// )
+app.use(express.json());
+app.use(express.static(publicPath));
+app.use(express.urlencoded({ extended: true }))
+app.use(cors())
 
-const server = app.listen(PORT,()=>{
-    MongoContainer.connect().then(()=>{
-        logger.trace(`server in the port, ${PORT}`);
-        logger.trace('connected to mongo');
-    })
+app.use('/api', appRoutes)
+app.use(errorMiddleware)
+
+const server = app.listen(PORT, () => {
+  MongoContainer.connect().then(() => {
+    logger.trace(`🚀 Server's up and runing on PORT: ${PORT} 🚀`);
+    logger.trace('Connected to mongo ✅');
+  })
 })
 
 server.on('error', error => {
-    logger.trace(`error ${error}`);
+  logger.trace(`error ${error}`);
 })
 
 process.on('unhandledRejection', (err, promise) => {
-    console.log(`Logged Error: ${err}`)
-    server.close(() => process.exit(1))
-})  
+  console.log(`Logged Error: ${err}`)
+  server.close(() => process.exit(1))
+})
+
+module.exports = app;

@@ -45,23 +45,13 @@ async function getCartProducts() {
         <h2>Carrito</h2>
         <p>Vacio<p>`
         }
-        // Procesar los datos del carrito y los productos del usuario
-        const products = (data.data[0].product)
-        console.log("soy", products)
-        const carritoContainer = document.getElementById('carrito-container');
-        carritoContainer.innerHTML = `
-        <h2>Carrito</h2>
-        <ul>
-          <li>${products.title}: Stock ${products.stock} - Prrice ${products.price}</li>
-        </ul>`
         
         let btn = document.getElementById('logoutBtn')
-btn.addEventListener('click', evt => {
-    evt.preventDefault()
-    localStorage.removeItem('access_token')
-    alert(`Hasta Luego ${fullName}`)
-    location.href = '../'
-        
+        btn.addEventListener('click', evt => {
+        evt.preventDefault()
+        localStorage.removeItem('access_token')
+        alert(`Hasta Luego ${fullName}`)
+        location.href = '../'     
     } )
 }catch (error) {
         console.error(error);

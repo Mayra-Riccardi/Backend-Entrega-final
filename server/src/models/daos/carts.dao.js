@@ -1,7 +1,7 @@
-const {STATUS} = require('../../constants/api.constants')
-const {HTTPError}= require('../../utils/errors.utils')
+const { STATUS } = require('../../constants/api.constants')
+const { HTTPError } = require('../../utils/errors.utils')
 const MongoContainer = require('../containers/mongo.containers')
-const CartSchema= require('../schemas/carts.schema')
+const CartSchema = require('../schemas/carts.schema')
 const ProductsDAO = require('./products.dao')
 
 const productsDAO = new ProductsDAO()
@@ -66,33 +66,6 @@ class CartsDAO extends MongoContainer {
       const message = `Cart with id ${cartId} does not exists`
       throw new HTTPError(STATUS.NOT_FOUND, message)
     }
-    return updatedCart
-  }
-
-  async decreaseProduct(cartId, prodId) {
-    const cartProducts = await this.getProducts(cartId)
-    const productIndex = cartProducts.findIndex(
-      item => item.product._id.toString() === prodId
-    )
-    const qty = cartProducts[productIndex].qty
-
-    if (qty <= 1) {
-      return await this.deleteProduct(cartId, prodId)
-    }
-
-    cartProducts[productIndex].qty--
-
-    const updatedCart = await this.model.updateOne(
-      { _id: cartId },
-      { $set: { products: cartProducts } },
-      { new: true }
-    )
-
-    if (!updatedCart.matchedCount) {
-      const message = `Cart with id ${cartId} does not exists`
-      throw new HTTPError(STATUS.NOT_FOUND, message)
-    }
-
     return updatedCart
   }
 

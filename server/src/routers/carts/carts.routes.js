@@ -12,7 +12,6 @@ router.delete('/:id',authMiddleware, adminMiddleware, cartsController.deleteCart
 router.get('/:id/products', authMiddleware, cartsController.getProducts)
 router.post('/:cartId/products/:prodId',authMiddleware, cartsController.saveProduct)
 router.delete('/:cartId/products/:prodId',authMiddleware, cartsController.deleteProduct)
-router.delete('/:cartId/products/decrease/:prodId', authMiddleware, cartsController.decreaseProduct)
 router.post('/:cartId/checkout', authMiddleware, cartsController.checkout)
 
   

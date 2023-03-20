@@ -4,7 +4,7 @@ const OrderSchema = new Schema({
   user: 
     {
   email: { type: String, required: true, default: {} },
-  adress: {type: String, required: true},
+  address: {type: String, required: true},
     },
   items: [
     {
