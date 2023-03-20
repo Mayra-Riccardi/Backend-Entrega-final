@@ -15,8 +15,6 @@ class InfoController {
             Carpeta_del_proyecto: process.cwd(),
             numero_de_procesadores: os.cpus().length,
         };
-        console.log(info)
-
         res.render('info', { info });
 
     }
