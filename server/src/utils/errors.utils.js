@@ -14,15 +14,14 @@ const succesResponse = (data, statusCode = 200) => {
     }
 }
 
-const errorResponse = (error, statusCode = 403, details = false) => {
-    let response = {
-      success: false,
-      statusCode,
-      message: error,
-    };
-    if (details) response.details = details;
-    return response;
+const errorResponse = (message, code) => {
+    return {
+      error: {
+      message: message,
+      code: code
+    },
   };
+}
 
   module.exports = {
     succesResponse,

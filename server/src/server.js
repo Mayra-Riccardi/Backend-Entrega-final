@@ -23,6 +23,14 @@ app.use(cors())
 
 app.use('/api', appRoutes)
 app.use(errorMiddleware)
+app.use((req, res) => {
+  res.status(404);
+  logger.error(`${req.method} ${req.originalUrl} ${res.statusCode}`);
+  res.render(path.resolve(__dirname, '../../client/public/error.ejs'), {
+    code: 404,
+    message: "Not Found",
+  });
+});
 
 // Server
 const server = app.listen(PORT, () => {

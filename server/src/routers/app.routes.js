@@ -1,5 +1,6 @@
 const path = require('path');
 const express = require('express');
+const {logger} = require('../logger/logger')
 const productsRoutes = require('./products/products.routes');
 const cartsRoutes = require('./carts/carts.routes');
 const authRoutes = require('./auth/auth.routes');
@@ -16,6 +17,7 @@ router.use('/auth', authRoutes);
 router.use('/users', usersRoutes);
 router.use('/orders', ordersRoutes);
 router.use('/info', infoServerRoute)
+
 
 router.get('/', authMiddleware, async (req, res) => {
     if(!req.user){
