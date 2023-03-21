@@ -49,9 +49,9 @@ class ProductsController {
   }
 
   async updateProduct(req, res, next) {
-    const { idProduct } = req.params
+    const { id } = req.params
     try {
-      const updatedProduct = await updateProduct(idProduct, req.body)
+      const updatedProduct = await updateProduct(id, req.body)
       const response = succesResponse(updatedProduct)
       res.status(STATUS.OK).json(response)
     } catch (err) {
@@ -60,9 +60,9 @@ class ProductsController {
   }
 
   async deleteProduct(req, res, next) {
-    const { idProduct } = req.params
+    const { id } = req.params
     try {
-      const deletedProduct = await deleteProduct(idProduct)
+      const deletedProduct = await deleteProduct(id)
       const response = succesResponse(deletedProduct)
       res.status(STATUS.OK).json(response)
     } catch (err) {

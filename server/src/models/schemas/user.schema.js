@@ -18,14 +18,13 @@ const UserSchema = new Schema({
         required: [true, 'Please enter an email'],
         unique: [true, 'Email already exists'],
         match: [
-            /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
             'Please enter a valid email'
         ]
     },
     password: {
         type: String,
-        required: [true, 'Please enter a password'],
-        minlength: [6, 'Password must be at least 6 characters long']
+        required: [true],
+        minlength: [6]
     },
     phone: {
         type: String,

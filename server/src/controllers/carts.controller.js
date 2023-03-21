@@ -56,9 +56,10 @@ class CartsController {
       const response = succesResponse(deletedProduct)
       res.json(response)
     } catch (err) {
-      next(new HTTPError(STATUS.BAD_REQUEST, `Sorry, we don't found the cart with ID ${id}, checkt it and try again`))
+      next(new HTTPError(STATUS.BAD_REQUEST, `Sorry, we couldn't find the cart id or product id, check it and try again`))
     }
   }
+  
 
 
   async checkout(req, res, next) {

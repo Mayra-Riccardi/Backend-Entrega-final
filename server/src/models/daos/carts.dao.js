@@ -57,15 +57,15 @@ class CartsDAO extends MongoContainer {
     const cartProducts = await this.getProducts(cartId)
     const newCartProducts = cartProducts.filter(
       item => item.product._id.toString() !== prodId)
+      if (cartProducts.length === newCartProducts.length) { // Si la longitud es la misma, significa que el producto no existe en el carrito
+        const message = `Product with id ${prodId} does not exist in cart with id ${cartId}`
+        throw new HTTPError(STATUS.NOT_FOUND, message)
+        }
     const updatedCart = await this.model.updateOne(
       { _id: cartId },
       { $set: { products: newCartProducts } },
       { new: true }
     )
-    if (!updatedCart.matchedCount) {
-      const message = `Cart with id ${cartId} does not exists`
-      throw new HTTPError(STATUS.NOT_FOUND, message)
-    }
     return updatedCart
   }
 
