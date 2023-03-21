@@ -47,7 +47,7 @@ const authMiddleware = async (req, res, next) => {
 
     next()
   } catch (error) {
-    return next(new HTTPError(STATUS.UNAUTHORIZED, 'Hola You must be authenticated to access this route'))
+    return next(new HTTPError(STATUS.UNAUTHORIZED, 'Sorry, You must be authenticated to access this route'))
   }
 
 }

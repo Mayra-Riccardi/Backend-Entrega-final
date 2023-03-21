@@ -15,7 +15,7 @@ async function getCartProducts() {
     const {fullName} = userData.data
     console.log(fullName)
 
-
+    console.log(token)
     try {
         const response = await fetch(`/api/carts/${cartId}/products`, {
             headers: {

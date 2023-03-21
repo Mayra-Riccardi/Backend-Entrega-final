@@ -8,7 +8,7 @@ const usersRoutes = require('./users/users.routes');
 const ordersRoutes = require('./orders/orders.routes');
 const infoServerRoute = require('./info/info.routes');
 const {authMiddleware} = require('../middleware/jwt.middleware');
-
+const messagesRoutes = require('./messages/messages.routes')
 const router = express.Router();
 
 router.use('/products', productsRoutes);
@@ -16,27 +16,33 @@ router.use('/carts', cartsRoutes);
 router.use('/auth', authRoutes);
 router.use('/users', usersRoutes);
 router.use('/orders', ordersRoutes);
-router.use('/info', infoServerRoute)
+router.use('/info', infoServerRoute);
+router.use('/chat', messagesRoutes);
 
 
-router.get('/', authMiddleware, async (req, res) => {
-    if(!req.user){
-        res.sendFile(path.resolve(__dirname, '../../../client/public/index.html'))
+router.get('/', async (req, res) => {
+    if (req.user) {
+        console.log(req.user)
+        res.redirect('/profile');
     } else {
-        res.sendFile(path.resolve(__dirname, '../../../client/public/profile.html'))
-
+        res.sendFile(path.resolve(__dirname, '../../../client/public/index.html'))
     }
-})
+});
+
 router.get('/auth/register', async (req, res) => {
     res.sendFile(path.resolve(__dirname, '../../../client/public/register.html'))
 })
 router.get('/auth/login', async (req, res) => {
     res.sendFile(path.resolve(__dirname, '../../../client/public/login.html'))
 })
-router.get('/profile', (req, res) => {
+router.get('/profile', async(req, res) => {
     res.sendFile(path.resolve(__dirname, '../../../client/public/profile.html'))
 })
+router.get('/chat', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../../../client/public/formChat.html'))
+});
 
 
 
-module.exports= router
+
+module.exports = router
