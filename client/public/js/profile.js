@@ -23,26 +23,45 @@ async function getCartProducts() {
             }
         });
 
+
         const saludo = document.getElementById('saludo');
         saludo.innerHTML = `<h2 style="color: white; font-weight: 400; display: flex; justify-content: center; padding-top: 50px; font-size: xxx-large;">Bienvenida ${fullName}</h2>
         <img style="width: 8%; min-width: 100px; margin-left: 46.5%;
         margin-top: 1%;" src="/assets/img/logo.png" alt="YOU NEED SUSHI">`
+
         const data = await response.json();
         console.log("soy data", data)
         console.log("length", data.data.length)
 
-        if (data.length >= 1) {
-            // Procesar los datos del carrito y los productos del usuario
-            const products = (data.data[0].product)
-            console.log("soy", products)
+        if (data.data.length >= 1) {
+            const products = data.data;
+
             const carritoContainer = document.getElementById('carrito-container');
             carritoContainer.innerHTML = `
-        <h2 style="color: white;">Carrito</h2>
-        <ul>
-          <li style="color: white;">${products.title}: Stock ${products.stock} - Prrice ${products.price}</li>
-        </ul>`
-        } else {
+              <h2 style="color: white; display: flex; justify-content: center; margin-top: 3%;">Tu Carrito</h2>
+                ${products.map(product => `
+                <table class="table table-dark">
+                <thead>
+                <tr>
+                <th scope="col" style="color: #f9c05b;">#</th>
+                <th scope="col" style="color: #f9c05b;">Stock</th>
+                <th scope="col" style="color: #f9c05b;">Title</th>
+                <th scope="col" style="color: #f9c05b;">Price</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row" style="color: #f9c05b;">1</th>
+                     <td style="color: #f9c05b;">${product.product.title}</td>
+                     <td style="color: #f9c05b;">${product.product.stock}</td>
+                     <td style="color: #f9c05b;">${product.product.price}</td>
+                 </tr>
+                 </tbody>`)}   <button id="logoutBtn" type="button" class="btn btn-danger btn-sm" style=" margin-left: 47.7%;
+                 margin-top: -35%;">Logout</button>`
+                     }
 
+
+        else {
             const carritoContainer = document.getElementById('carrito-container');
             carritoContainer.innerHTML = `
         <h2 style="color: white; display: flex;
