@@ -45,7 +45,7 @@ class CartsController {
       const response = succesResponse(newProduct)
       res.status(STATUS.CREATED).json(response)
     } catch (err) {
-      next(new HTTPError(STATUS.BAD_REQUEST))
+      next(new HTTPError(STATUS.BAD_REQUEST, `Opss, sorry, check the Cart ID or the Prodduct ID and try again`))
     }
   }
 
@@ -72,7 +72,7 @@ class CartsController {
       const order = await checkoutCart(cartId, user)
 
       const response = succesResponse({ order })
-      res.json(response)
+      res.status(STATUS.CREATED).json(response)
     } catch (err) {
       next(err)
     }
