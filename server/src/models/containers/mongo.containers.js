@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 const dbconfig = require('../../db/config');
 const { HTTPError } = require('../../utils/errors.utils');
-const { STATUS } = require('../../constants/api.constants')
+const { STATUS } = require('../../constants/api.constants');
+const envConfig = require('../../env.config');
 mongoose.set('strictQuery', true);
 
 class MongoContainer {
@@ -10,7 +11,7 @@ class MongoContainer {
   }
 
   static async connect() {
-    await mongoose.connect(dbconfig.mongodb.connectTo("You-Need-Sushi"))
+    await mongoose.connect(dbconfig.mongodb.connectTo(`${envConfig.DB_NAME}`))//PLEASE REPLACE THIS WITH YOUR NAME COLLECTION
   }
 
   static async disconnect() {

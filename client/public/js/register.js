@@ -1,5 +1,5 @@
 const formRegister = document.getElementById("signup-form");
-formSignup.addEventListener('submit', async (event) => {
+formRegister.addEventListener('submit', async (event) => {
   event.preventDefault();
   const fullName = formRegister[0].value;
   const email = formRegister[1].value;

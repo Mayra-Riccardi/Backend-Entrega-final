@@ -2,6 +2,7 @@ require('dotenv').config();
 
 module.exports = {
   PORT: process.env.PORT || 8080,
+  DB_NAME: process.env.DB_NAME || 'test',
   DB_PASSWORD: process.env.DB_PASSWORD || '',
   ADMIN: process.env.ADMIN || false,
   SESSION_SECRET: process.env.SESSION_SECRET || '',
