@@ -23,15 +23,16 @@ async function getCartProducts() {
             }
         });
 
-
+        const data = await response.json();
+        console.log("soy data", data)
+        console.log("length", data.data.length)
+        
         const saludo = document.getElementById('saludo');
         saludo.innerHTML = `<h2 style="color: white; font-weight: 400; display: flex; justify-content: center; padding-top: 50px; font-size: xxx-large;">Bienvenida ${fullName}</h2>
         <img style="width: 8%; min-width: 100px; margin-left: 46.5%;
         margin-top: 1%;" src="/assets/img/logo.png" alt="YOU NEED SUSHI">`
 
-        const data = await response.json();
-        console.log("soy data", data)
-        console.log("length", data.data.length)
+      
 
         if (data.data.length >= 1) {
             const products = data.data;

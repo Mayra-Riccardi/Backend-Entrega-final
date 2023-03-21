@@ -69,6 +69,9 @@ class CartsController {
       if (!user) {
         throw new HTTPError(STATUS.BAD_REQUEST, 'Buyer and address are required in the body to checkout')
       }
+      if(!cartId) {
+        throw new HTTPError(STATUS.NOT_FOUND, `Cart with ID ${cartId} not found`)
+      }
 
       const order = await checkoutCart(cartId, user)
 

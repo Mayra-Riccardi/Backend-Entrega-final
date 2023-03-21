@@ -17,9 +17,6 @@ const UserSchema = new Schema({
         type: String,
         required: [true, 'Please enter an email'],
         unique: [true, 'Email already exists'],
-        match: [
-            'Please enter a valid email'
-        ]
     },
     password: {
         type: String,

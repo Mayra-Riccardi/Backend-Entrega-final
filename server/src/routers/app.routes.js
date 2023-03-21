@@ -20,14 +20,14 @@ router.use('/info', infoServerRoute);
 router.use('/chat', messagesRoutes);
 
 
-router.get('/', async (req, res) => {
-    if (req.user) {
-        console.log(req.user)
-        res.redirect('/profile');
-    } else {
-        res.sendFile(path.resolve(__dirname, '../../../client/public/index.html'))
-    }
-});
+// router.get('/', async (req, res) => {
+//     if (req.user) {
+//         console.log(req.user)
+//         res.redirect('/profile');
+//     } else {
+//         res.sendFile(path.resolve(__dirname, '../../../client/public/index.html'))
+//     }
+// });
 
 router.get('/auth/register', async (req, res) => {
     res.sendFile(path.resolve(__dirname, '../../../client/public/register.html'))

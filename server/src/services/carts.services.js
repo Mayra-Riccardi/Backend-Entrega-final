@@ -35,7 +35,6 @@ const checkoutCart = async (cartId, user) => {
     if (products.length < 1) {
       throw new HTTPError(STATUS.BAD_REQUEST, 'The cart must have at least one product to checkout')
     }
-  
     await cartsDAO.emptyCart(cartId)
   
 
