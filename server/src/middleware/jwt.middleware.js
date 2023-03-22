@@ -23,7 +23,7 @@ const adminMiddleware = (req, res, next) => {
 //const getUser = async (id) => await UsersDAO.getById(id)
 
 const authMiddleware = async (req, res, next) => {
-  console.log('Middleware de autenticación llamado');
+  logger.trace('Middleware de autenticación llamado');
 
   let token
 
